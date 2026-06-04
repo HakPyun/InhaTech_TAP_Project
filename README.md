@@ -1,5 +1,5 @@
 # Travel Along the Peninsula (TAP_Project)
-<img width="769" height="290" alt="image" src="https://github.com/user-attachments/assets/15f1b074-ad5c-4a81-b016-45f5aab2a424" />
+<img width="769" height="290" alt="image" src="https://github.com/user-attachments/assets/8b466424-bb46-4a0b-b0f0-12e85c963361" />
 
 > '반도를 따라 여행하다'라는 뜻으로 인하대 후문의 맛집을 등록하고 리뷰를 남길 수 있는 프로그램.
 
@@ -67,7 +67,7 @@
 ## 프로젝트 구조
 
 - DB엔티티
-<img width="749" height="643" alt="image" src="https://github.com/user-attachments/assets/58ec0c09-31d1-4e0a-a177-b90d1a6b2b4f" />
+<img width="749" height="643" alt="image" src="https://github.com/user-attachments/assets/d7625234-f96e-4076-bf96-56a0ed821ef9" />
 
 ### 🌐 System Architecture & Flow
 
@@ -95,18 +95,17 @@
 
 ## 주요 화면
 ### 메인
-<img width="687" height="784" alt="메인 화면" src="https://github.com/user-attachments/assets/ccc35d0c-23c4-4f77-a03d-95fe38897922" />
+<img width="687" height="784" alt="메인 화면" src="https://github.com/user-attachments/assets/0307b57f-c16c-4bea-91c2-1e454be81e6a" />
 
 ### GIS 데이터 시각화 및 목록화
-<img width="687" height="578" alt="GIS 데이터 시각화" src="https://github.com/user-attachments/assets/9abc099c-74c3-42e1-9549-e7661c6a0448" />
+<img width="687" height="578" alt="GIS 데이터 시각화" src="https://github.com/user-attachments/assets/7ebe42c8-f081-4dce-a4bf-ca46e43dd8a8" />
 
 ### 가게 등록
-<img width="691" height="691" alt="가게 등록 화면" src="https://github.com/user-attachments/assets/daf80b1a-079f-41d9-8de6-9337bf87cac6" />
+<img width="691" height="691" alt="가게 등록 화면" src="https://github.com/user-attachments/assets/c5088ec9-269c-4881-a72a-5299d96f1876" />
 
 ### 가게 상세 및 리뷰
-<img width="488" height="764" alt="가게 상세" src="https://github.com/user-attachments/assets/0f8a1b7a-cc9a-410a-a7e6-d3f51694f789" />
-
-<img width="484" height="752" alt="리뷰 화면" src="https://github.com/user-attachments/assets/f5a8221c-ca69-4399-a73f-54449984b5f1" />
+<img width="488" height="764" alt="가게 상세" src="https://github.com/user-attachments/assets/6de83646-1468-4841-8554-81e32b928e86" />
+<img width="484" height="752" alt="리뷰 화면" src="https://github.com/user-attachments/assets/d174159b-7fc3-4400-951a-dcd02ca18462" />
 
 ## 🚀 Key Achievements (기술적 성과)
 
