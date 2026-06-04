@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<th:block layout:fragment="script">
+    $('#container').on('click', '.mobile-nav-toggle', function(e) {
+    // 클릭 이벤트가 발생했을 때 실행되는 함수 내용
+
+    // '#navbar' ID를 가진 요소의 클래스 'navbar-mobile'을 toggle(추가 또는 제거)합니다.
+    $('#navbar').toggleClass('navbar-mobile');
+
+    // 현재 클릭된 요소의 클래스 'bi-list'와 'bi-x'를 toggle합니다.
+    $(this).toggleClass('bi-list bi-x');
+    });
+
+</th:block>
+<div layout:fragment="content">
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+
+        <div class="container" data-aos="zoom-out" data-aos-delay="100">
+            <div class="row">
+                <div class="col-xl-6">
+                    <h1>Welcome to TAP!</h1>
+                    <h2>인하 후문에 숨겨진 맛집을 찾아보세요!</h2>
+                    <a href="/map" class="btn-get-started scrollto">찾아보기</a>
+                </div>
+            </div>
+        </div>
+
+    </section><!-- End Hero -->
+
+    <main id="main">
+
+
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row no-gutters">
+                    <div class="content col-xl-5 d-flex align-items-stretch">
+                        <div class="content">
+                            <h3>소개</h3>
+                            <p>
+                                인하공업전문대학 관광경영학과와 협업하여 만든 인하대 후문 다양한 가게 소개 웹페이지 입니다.
+                            </p>
+                            <a href="#" class="about-btn"><span>이용하기</span> <i class="bx bx-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 d-flex align-items-stretch">
+                        <div class="icon-boxes d-flex flex-column justify-content-center">
+                            <div class="row">
+                                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+                                    <i class="fa-solid fa-registered"></i>
+                                    <h4>등록</h4>
+                                    <p>등록자가 되어 가게의 데이터를 수집하고 등록해보세요!</p>
+                                </div>
+                                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+                                    <i class="bx bx-receipt"></i>
+                                    <h4>리뷰</h4>
+                                    <p>로그인하고 가게에 대한 리뷰를 작성해보세요!</p>
+                                </div>
+                                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <h4>가게 탐색</h4>
+                                    <p>지도를 통해 정보들을 탐색하고 가고 싶은 가게를 결정하세요!</p>
+                                </div>
+                                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+                                    <i class="bx bx-images"></i>
+                                    <h4>이미지 슬라이드</h4>
+                                    <p>아래 이미지 슬라이드를 카테고리별로 둘러보며 가게를 탐방하세요!</p>
+                                </div>
+                            </div>
+                        </div><!-- End .content-->
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Section -->
+
+
+        <!-- ======= Tabs Section ======= -->
+        <section id="tabs" class="tabs">
+            <div class="container" data-aos="fade-up">
+
+                <ul class="nav nav-tabs row d-flex">
+                    <li class="nav-item col-3">
+                        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <h4 class="d-none d-lg-block">전체</h4>
+                        </a>
+                    </li>
+                    <li class="nav-item col-3">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
+                            <i class="fa-solid fa-utensils"></i>
+                            <h4 class="d-none d-lg-block">음식점</h4>
+                        </a>
+                    </li>
+                    <li class="nav-item col-3">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
+                            <i class="fas fa-whiskey-glass"></i>
+                            <h4 class="d-none d-lg-block">술집</h4>
+                        </a>
+                    </li>
+                    <li class="nav-item col-3">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
+                            <i class="fa-solid fa-mug-hot"></i>
+                            <h4 class="d-none d-lg-block">카페</h4>
+                        </a>
+                    </li>
+                </ul>
+<!--============================================전체 슬라이드==================================================-->
+                <div class="tab-content">
+                    <div class="tab-pane active show" id="tab-1">
+                        <div class="row">
+
+                            <div id="template-mo-zay-hero-carousel_hole" class="carousel slide" data-bs-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <!--                                    이게 페이지 느낌인데 이미지/3만큼 설정해야함-->
+                                    <li data-bs-target="#template-mo-zay-hero-carousel_hole" data-bs-slide-to="0" class="active"></li>
+                                    <li data-bs-target="#template-mo-zay-hero-carousel_hole" data-bs-slide-to="1"></li>
+                                    <li data-bs-target="#template-mo-zay-hero-carousel_hole" data-bs-slide-to="2"></li>
+                                </ol>
+                                <a class="carousel-control-prev" href="#template-mo-zay-hero-carousel_hole" role="button" data-bs-slide="prev">
+                                    <img src="assets/img/left.png">
+                                </a>
+                                <a class="carousel-control-next" href="#template-mo-zay-hero-carousel_hole" role="button" data-bs-slide="next">
+                                    <img src="assets/img/right.png">
+                                </a>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="container">
+                                            <div class="row p-5">
+                                                <!-- 한페이지에 구성하는 것-->
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                            위에까지가 3개의 이미지 가져오기-->
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="container">
+                                            <div class="row p-5">
+
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="container">
+                                            <div class="row p-5">
+
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- End Banner Hero -->
+
+                        </div>
+                    </div>
+
+
+<!--                   ==================================음식점 슬라이드============== -->
+                    <div class="tab-pane" id="tab-2">
+                        <div class="row">
+                            <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+                                <ol class="carousel-indicators">
+<!--                                    이게 페이지 느낌인데 이미지/3만큼 설정해야함-->
+                                    <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
+                                    <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
+                                    <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
+                                </ol>
+                                <a class="carousel-control-prev" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
+                                    <img src="assets/img/left.png">
+                                </a>
+                                <a class="carousel-control-next" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="next">
+                                    <img src="assets/img/right.png">
+                                </a>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="container">
+                                            <div class="row p-5">
+<!--                                                요소 가져오기-->
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+<!--                                            위에까지가 3개의 이미지 가져오기-->
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="container">
+
+<!--                                            밑 div가 한면이라고 생각-->
+                                            <div class="row p-5">
+
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="container">
+                                            <div class="row p-5">
+
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- End Banner Hero -->
+
+                        </div>
+                    </div>
+                    <!--============================================술집 슬라이드==================================================-->
+                    <div class="tab-pane" id="tab-3">
+                        <div class="row">
+
+                            <div id="template-mo-zay-hero-carousel_bar" class="carousel slide" data-bs-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <!--                                    이게 페이지 느낌인데 이미지/3만큼 설정해야함-->
+                                    <li data-bs-target="#template-mo-zay-hero-carousel_bar" data-bs-slide-to="0" class="active"></li>
+                                    <li data-bs-target="#template-mo-zay-hero-carousel_bar" data-bs-slide-to="1"></li>
+                                    <li data-bs-target="#template-mo-zay-hero-carousel_bar" data-bs-slide-to="2"></li>
+                                </ol>
+                                <a class="carousel-control-prev" href="#template-mo-zay-hero-carousel_bar" role="button" data-bs-slide="prev">
+                                    <img src="assets/img/left.png">
+                                </a>
+                                <a class="carousel-control-next" href="#template-mo-zay-hero-carousel_bar" role="button" data-bs-slide="next">
+                                    <img src="assets/img/right.png">
+                                </a>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="container">
+                                            <div class="row p-5">
+                                                <!--                                                요소 가져오기-->
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                            위에까지가 3개의 이미지 가져오기-->
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="container">
+
+                                            <!--                                            밑 div가 한면이라고 생각-->
+                                            <div class="row p-5">
+
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="container">
+                                            <div class="row p-5">
+
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- End Banner Hero -->
+                        </div>
+                    </div>
+                    <!--============================================카페 슬라이드==================================================-->
+                    <div class="tab-pane" id="tab-4">
+                        <div class="row">
+
+                            <div id="template-mo-zay-hero-carousel_coffee" class="carousel slide" data-bs-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <!--                                    이게 페이지 느낌인데 이미지/3만큼 설정해야함-->
+                                    <li data-bs-target="#template-mo-zay-hero-carousel_coffee" data-bs-slide-to="0" class="active"></li>
+                                    <li data-bs-target="#template-mo-zay-hero-carousel_coffee" data-bs-slide-to="1"></li>
+                                    <li data-bs-target="#template-mo-zay-hero-carousel_coffee" data-bs-slide-to="2"></li>
+                                </ol>
+                                <a class="carousel-control-prev" href="#template-mo-zay-hero-carousel_coffee" role="button" data-bs-slide="prev">
+                                    <img src="assets/img/left.png">
+                                </a>
+                                <a class="carousel-control-next" href="#template-mo-zay-hero-carousel_coffee" role="button" data-bs-slide="next">
+                                    <img src="assets/img/right.png">
+                                </a>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="container">
+                                            <div class="row p-5">
+                                                <!--                                                요소 가져오기-->
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                            위에까지가 3개의 이미지 가져오기-->
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="container">
+
+                                            <!--                                            밑 div가 한면이라고 생각-->
+                                            <div class="row p-5">
+
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="container">
+                                            <div class="row p-5">
+
+                                                <div class="row h-100 mx-1 mb-5 mt-3 gx-md-2 gx-lg-4">
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/isak.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Isak Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/simon.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Simon Sandberg</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mb-5 mb-md-0">
+                                                        <div class="card card-span h-100 shadow-primary">
+                                                            <div class="card-body my-3">
+                                                                <img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/readyimg.png" alt="" />
+                                                                <div class="align-items-xl-center d-block d-xl-flex px-3 mt-3 align-self-end"><img class="img-fluid me-3 me-md-2 me-lg-3" src="assets/img/gallery/petter.png" width="50" alt="" />
+                                                                    <div class="flex-1 align-items-center pt-2">
+                                                                        <h6 class="mb-0">Pettersson</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- End Banner Hero -->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+
+
+</div>
+</html>

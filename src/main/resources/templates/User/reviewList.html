@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+    <script th:src="@{/assets/js/scripts.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/deleteReview.js}"></script>
+</head>
+
+<div layout:fragment="content" >
+
+    <section id="counts" class="counts" style="background-color: #FFFFFF;">
+        <table class="table caption-top">
+            <caption>My Review</caption>
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Shop</th>
+                <th scope="col">created</th>
+                <th scope="col">Star score</th>
+                <th scope="col">Review</th>
+                <th scope="col">Del</th>
+            </tr>
+            </thead>
+            <tr th:each="value,index: ${reviewList}" scope="row" >
+                <td th:text="${shopList[__${index.index}__]}"></td>
+                <td  th:text="${#temporals.format(value.createdAt, 'yyyy-MM-dd')}"></td>
+                <td th:text="${value.uScore}"></td>
+                <td th:text="${value.uReview}"></td>
+                <td><input type="button" class="btn btn-primary" th:attr="onclick='deleteReview(\'' + ${value.review_id} + '\')'" value="삭제"></td>
+
+            </tr>
+
+        </table>
+    </section>
+</div>
+</html>

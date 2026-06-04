@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>등록</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/kakaoAddr.js"></script>
+    <!--    <script src="js/animation.js"></script>-->
+    <!--    <script src="jquery-1.7.1.min.js"></script>-->
+    <script th:src="@{/js/menuInsDel.js}"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <th:block layout:fragment="script">
+
+        <script th:inline="javascript">
+            $(document).ready(function(){
+              var errorMessage = [[${errorMessage}]];
+              if(errorMessage != null){
+                  alert(errorMessage);
+              }
+
+              bindDomEvent();
+
+          });
+
+          function bindDomEvent(){
+              $(".custom-file-input").on("change", function() {
+                  var fileName = $(this).val().split("\\").pop();  //이미지 파일명
+                  var fileExt = fileName.substring(fileName.lastIndexOf(".")+1); // 확장자 추출
+                  fileExt = fileExt.toLowerCase(); //소문자 변환
+
+                  if(fileExt != "jpg" && fileExt != "jpeg" && fileExt != "gif" && fileExt != "png" && fileExt != "bmp"){
+                      alert("이미지 파일만 등록이 가능합니다.");
+                      return;
+                  }
+
+                  $(this).siblings(".custom-file-label").html(fileName);
+              });
+          }
+    const autoHyphen2 = (target) => {
+        target.value = target.value
+       .replace(/[^0-9]/g, '')
+      .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+        }
+
+        </script>
+
+    </th:block>
+</head>
+
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        .input-group {
+            margin-bottom : 15px
+        }
+        .img-div {
+            margin-bottom : 10px
+        }
+        .fieldError {
+            color: red;
+
+        }
+    </style>
+</th:block>
+
+<div layout:fragment="content">
+    <section class="bg-light">
+        <form role="form" method="post" action="/shop/update" enctype="multipart/form-data" th:object="${myShop}" id="register">
+            <div class="container py-3">
+                <div class="row align-items-center text-center justify-content-between">
+                    <span class="text-dark h4">가게 수정하기</span>
+                </div>
+
+<!--                <input type="hidden" th:field="*{sid}">-->
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">가게명</span>
+                    </div>
+                    <!--                    <p th:if="${loginErrorMsg}"  th:text="${loginErrorMsg}" class="fieldError"></p>-->
+                </div>
+                <input type="text" th:field="*{sName}" name="sName"class="form-control" placeholder="가게명을 입력해주세요.">
+                <!--                <p th:if="${#fields.hasErrors('sNameError')}" th:errors="*{sName}" class="fieldError">Incorrect data</p><br>-->
+                <p th:if="${sNameErrorMsg}"  th:text="${sNameErrorMsg}" class="fieldError"></p><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">카테고리</span>
+                    </div>
+                    <input type="radio" class="btn-check" id="restaurant" name="restaurant" th:field="*{cat}" value="음식점" />
+                    <label class="btn btn-outline-success" for="restaurant">음식점</label>
+                    <input type="radio" class="btn-check" id="bar" name="bar" th:field="*{cat}" value="술집" />
+                    <label class="btn btn-outline-success" for="bar">술집</label>
+                    <input type="radio" class="btn-check" id="cafe" name="cafe" th:field="*{cat}" value="카페" />
+                    <label class="btn btn-outline-success" for="cafe">카페</label>
+                </div><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">주소입력</span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="sample6_address"  class="form-control" th:field="*{sAddrMain}" name="main_addr" placeholder="주소 찾기 버튼 클릭" readonly>
+                    <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기" class="btn btn-primary"><br>
+                </div><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">상세주소</span>
+                    </div>
+                </div>
+                <input type="text" id="sample6_detailAddress" th:field="*{sAddrSub}" placeholder="ex)1층" class="form-control" name="sub_addr">
+                <p th:if="${#fields.hasErrors('sAddrMain')}" th:errors="*{sAddrMain}" class="fieldError">Incorrect data</p><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">전화번호</span>
+                    </div>
+                </div>
+                <input type="text" th:field="*{sTell}"  oninput="autoHyphen2(this)" maxlength="13" placeholder="전화번호를 입력해주세요." class="form-control">
+                <p th:if="${#fields.hasErrors('sTell')}" th:errors="*{sTell}" class="fieldError">Incorrect data</p><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">운영 시간</span>
+                    </div>
+                    <div class="container">
+                        <input type="time" name="shop_start_time" th:value="${hour.sTime}" >부터
+                        <input type="time" name="shop_end_time" th:value="${hour.eTime}">까지
+                    </div>
+                </div><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">쉬는 시간 (※쉬는 시간이 있는 경우만)</span>
+                    </div>
+                    <div class="container">
+                        <input type="time" name="breakTimeStart" th:field="*{breakSTime}">부터
+                        <input type="time" name="breakTimeEnd" th:field="*{breakETime}">까지
+                    </div>
+                </div><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">휴무일 (※중복 선택 가능)</span>
+                    </div>
+                    <div class="input-group d-flex justify-content-center">
+                        <div>
+                            <input type="checkbox" class="btn-check" name="dayOff" id="allDayOpen" value="없음" th:checked="${hour.sDay eq '없음'}">
+                            <label class="btn btn-outline-danger" for="allDayOpen">없음</label>
+                            <input type="checkbox" class="btn-check" name="dayOff" id="monday" value="월요일" th:checked="${hour.sDay eq '월요일'}">
+                            <label class="btn btn-outline-danger" for="monday">월요일</label>
+                            <input type="checkbox" class="btn-check" name="dayOff" id="tuesday" value="화요일" th:checked="${hour.sDay eq '화요일'}">
+                            <label class="btn btn-outline-danger" for="tuesday">화요일</label>
+                            <input type="checkbox" class="btn-check" name="dayOff" id="wednesday" value="수요일" th:checked="${hour.sDay eq '수요일'}">
+                            <label class="btn btn-outline-danger" for="wednesday">수요일</label>
+                            <input type="checkbox" class="btn-check" name="dayOff" id="thursday" value="목요일" th:checked="${hour.sDay eq '목요알'}">
+                            <label class="btn btn-outline-danger" for="thursday">목요일</label>
+                            <input type="checkbox" class="btn-check" name="dayOff" id="friday" value="금요일" th:checked="${hour.sDay eq '금요일/'}">
+                            <label class="btn btn-outline-danger" for="friday">금요일</label>
+                            <input type="checkbox" class="btn-check" name="dayOff" id="saturday" value="토요일" th:checked="${hour.sDay eq '토요일'||hour.sDay eq '주말'}">
+                            <label class="btn btn-outline-danger"c for="saturday">토요일</label>
+                            <input type="checkbox" class="btn-check" name="dayOff" id="sunday" value="일요일" th:checked="${hour.sDay eq '일요일'||hour.sDay eq '주말'}">
+                            <label class="btn btn-outline-danger" for="sunday">일요일</label>
+                        </div>
+                    </div>
+                </div><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">영업시간 특이사항</span>
+                    </div>
+                </div>
+                <input type="text" th:field="*{bhSignificant}" class="form-control" placeholder="ex)공휴일 쉽니다.">
+                <p th:if="${#fields.hasErrors('bhSignificant')}" th:errors="*{bhSignificant}" class="fieldError">Incorrect data</p><br>
+
+                <div class="table-responsive"><!------------------------------------메뉴 넣는 곳---------------------------------------------------------------->
+                    <table class="table caption-top" id="menuTable" >
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">메뉴</span>
+                            </div>
+                        </div>
+
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">메뉴</th>
+                            <th scope="col">가격</th>
+                            <th scope="col">비고</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="value,index: ${menus}" scope="row" >
+                            <td th:text="${index.index + 1}">Index</td>
+                            <td><input type="text" class="menu" name="menu" style="width: 100px;" th:value="${value.menu}"></td>
+                            <td><input type="number" class="menu_price" name="menu_price" style="width: 100px;" th:value="${value.menu_price}"></td>
+                            <td th:if="${index.index == 0}">
+                                <span th:text="|필수|">Required</span>
+                            </td>
+                            <td th:unless="${index.index == 0}">
+                                <input type="button" class="btnRemove btn btn-danger" value="삭제">
+                            </td>
+                        <!-- 여기에 추가된 행이 들어갈 것입니다. -->
+                    </table>
+                </div>
+                <div class="buttons">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <input type="button" class="btnAdd btn btn-primary" value="메뉴 추가"><br>
+                    </div>
+                </div><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">성별 추천</span>
+                    </div>
+                    <input type="radio" class="btn-check" id="both" name="both" th:field="*{sexRecommendation}" value="모두" />
+                    <label class="btn btn-outline-primary" for="both">모두</label><br>
+                    <input type="radio" class="btn-check" id="male" name="male" th:field="*{sexRecommendation}" value="남성" />
+                    <label class="btn btn-outline-primary" for="male">남성</label><br>
+                    <input type="radio" class="btn-check" id="female" name="female" th:field="*{sexRecommendation}" value="여성" />
+                    <label class="btn btn-outline-primary" for="female">여성</label><br>
+                </div><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">가게 꿀팁</span>
+                    </div>
+                </div>
+                <input type="text" th:field="*{tips}" class="form-control" placeholder="사장님만의 꿀조합이나 팁들을 적어주세요.">
+                <p th:if="${#fields.hasErrors('tips')}" th:errors="*{tips}" class="fieldError">Incorrect data</p><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">사장님 한마디</span>
+                    </div>
+                </div>
+                <input type="text" th:field="*{ceoIntroduction}" class="form-control" placeholder="소개말을 작성해 주세요.">
+                <p th:if="${#fields.hasErrors('ceoIntroduction')}" th:errors="*{ceoIntroduction}" class="fieldError">Incorrect data</p><br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">메뉴판 이미지</span>
+                    </div>
+                </div>
+
+
+                    <div class="form-group">
+                        <div class="custom-file img-div">
+                            <input type="file" class="custom-file-input" name="itemImgFile">
+                            <!--                   <input type="hidden" name="shopImgIds" th:value="${shopImgDto.shop_img_id}">-->
+                            <!--                  <label class="custom-file-label"  hidden="hidden"  th:text="${not #strings.isEmpty(shopImgDto.shop_oriImgName)} ? ${shopImgDto.shop_oriImgName} : '메뉴판이미지' + ${status.index+1}"></label>-->
+                        </div>
+                    </div>
+                <br>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">가게 이미지</span>
+                    </div>
+                </div>
+                    <div class="table-responsive"><!------------------------------------메뉴 넣는 곳---------------------------------------------------------------->
+                        <table class="table caption-top" id="imgTable" >
+                            <thead class="table-dark">
+                            <tr>
+                                <th>번호</th>
+                                <th>선택</th>
+                                <th>비고</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><span>1</span></td>
+                                <td><input type="file" id="ex_filename" class="upload-hidden" name="itemImgFile"></td>
+                                <td><span>대표</span></td>
+                            </tr>
+                            <!-- 여기에 추가된 행이 들어갈 것입니다. -->
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="buttons">
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <input type="button" class="btnImgAdd btn btn-primary" value="이미지 추가"><br>
+                        </div>
+                    </div><br>
+
+
+
+                <div  style="text-align: center" class="d-grid gap-2 col-6 mx-auto">
+                    <button  type="submit" class="btn btn-primary">수정</button><br>
+                </div>
+            </div>
+        </form>
+    </section>
+</div>
+</html>

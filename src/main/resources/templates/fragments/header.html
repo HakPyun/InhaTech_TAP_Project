@@ -1,0 +1,62 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+<div th:fragment="header">
+
+    <nav class="navbar fixed-top" style="height:80px; background-color: white;">
+        <div class="container-fluid">
+
+            <a href="/" class="logo me-auto"><img src="/img/tap1.png" alt=""></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h3>TAP</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+                </div>
+                <div>
+                    <a  style="color: red;" sec:authorize="isAnonymous()" href="/member/login">Login</a>
+                    <a  style="color: red;"   sec:authorize="isAuthenticated()" href="/logout">Logout</a>
+                </div>
+                <div sec:authorize="isAnonymous()">
+                    <a class="nav-link scrollto" sec:authorize="isAnonymous()" href="/member/save">Sign up</a>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <a class="nav-link scrollto"  sec:authorize="isAuthenticated()"  href="/mypage/check" >myPage</a>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <a class="nav-link scrollto"  sec:authorize="isAuthenticated()"  href="/review/list" >myReview</a>
+                </div>
+
+                <div >
+                    <a href="/shopregist" sec:authorize="hasAnyAuthority('ROLE_EDITOR')">가게 등록</a>
+                </div>
+                <div >
+                    <a  href="/shop/myShopList" sec:authorize="hasAnyAuthority('ROLE_EDITOR')">등록한 가게 리스트</a>
+                </div>
+                <div>
+                                <a  href="/admin/member/list" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">회원관리</a>
+
+                </div>
+                <div>
+                    <a href="/admin/editor/check/list" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">등록자 신청 리스트</a>
+
+                </div>
+                <div>
+                    <a href="/shopregist" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">가게 등록</a>
+
+                </div>
+                <div>
+                    <a  href="/shop/myShopList" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">등록한 가게 리스트</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+</html>

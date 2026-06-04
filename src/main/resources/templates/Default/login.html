@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--      layout:decorate="~{layouts/layout1}"-->
+
+<head>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--    <link th:href="@{css/style.css}" rel="stylesheet">-->
+</head>
+<th:block layout:fragment="css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins&display=swap');
+
+        .fieldError {
+            color: red;
+
+        }
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            background-color: #ffffff;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .wrapper {
+            max-width: 500px;
+            border-radius: 10px;
+            margin: 20px auto;
+            padding: 30px 40px;
+            box-shadow: 20px 20px 80px rgb(206, 206, 206)
+        }
+
+        .logo-img{
+          width: 150px;
+          height: 65px;
+          margin: 30px auto;
+        }
+
+        .h2 {
+            font-family: 'impact';
+            font-size: 3.5rem;
+<!--            font-weight: bold;-->
+            color: #000000;
+        }
+
+        .h4 {
+            font-family: 'Poppins', sans-serif
+        }
+
+        .input-field {
+            border-radius: 5px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #000000;
+            color: #000000;
+        }
+
+        .input-field:hover {
+            color: #DE393B;
+            border: 1px solid #7b4ca0
+        }
+
+        input {
+            border: none;
+            outline: none;
+            box-shadow: none;
+            width: 100%;
+            padding: 0px 2px;
+            font-family: 'Poppins', sans-serif
+        }
+
+        .fa-eye-slash.btn {
+            border: none;
+            outline: none;
+            box-shadow: none
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 700
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #DE393B;
+        }
+
+        .option {
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer
+        }
+
+        .option label.text-muted {
+            display: block;
+            cursor: pointer
+        }
+
+        .option input {
+            display: none
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer
+        }
+
+        .option input:checked~.checkmark:after {
+            display: block
+        }
+
+        .option .checkmark:after {
+            content: "";
+            width: 13px;
+            height: 13px;
+            display: block;
+            background: #DE393B;
+            position: absolute;
+            top: 48%;
+            left: 53%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: 300ms ease-in-out 0s
+        }
+
+        .option input[type="radio"]:checked~.checkmark {
+            background: #fff;
+            transition: 300ms ease-in-out 0s;
+            border: 1px solid #000000
+        }
+
+        .option input[type="radio"]:checked~.checkmark:after {
+            transform: translate(-50%, -50%) scale(1)
+        }
+
+        .btn.btn-block {
+            border-radius: 20px;
+            background-color: #DE393B;
+            color: #fff
+        }
+
+        .btn.btn-block:hover {
+            background-color: #000000
+        }
+
+        @media(max-width: 575px) {
+            .wrapper {
+                margin: 10px
+            }
+        }
+
+        @media(max-width:424px) {
+            .wrapper {
+                padding: 30px 10px;
+                margin: 5px
+            }
+
+            .option {
+                position: relative;
+                padding-left: 22px
+            }
+
+            .option label.text-muted {
+                font-size: 0.95rem
+            }
+
+            .checkmark {
+                position: absolute;
+                top: 2px
+            }
+
+            .option .checkmark:after {
+                top: 50%
+            }
+
+            #forgot {
+                font-size: 0.95rem
+            }
+        }
+    </style>
+</th:block>
+<div layout:fragment="content">
+    <div class="col-sm my-3" style="text-align: center">
+    <a href="/">
+        <img class="logo-img" src="/img/tap1.png"/>
+    </a>
+    </div>
+        <div class="wrapper bg-white">
+            <div class="h2 text-center">Log in</div>
+            <!--            <div class="h4 text-muted text-center pt-2">Log In</div>-->
+            <form th:action="@{/member/login}" method="post">
+                <div class="form-group py-2">
+                    <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" name="member_id" placeholder="Enter your ID" > </div>
+                </div>
+                <div class="form-group py-1 pb-2">
+                    <div class="input-field"> <span class="fas fa-lock p-2"></span> <input type="password" name=member_pw placeholder="Enter your Password">
+                        <span class="far fa-eye-slash text-muted"></span> </div>
+                </div>
+                <p th:if="${loginErrorMsg}"  th:text="${loginErrorMsg}" class="fieldError"></p>
+                <div class="d-flex align-items-start">
+                    <div class="ml-auto"> <a href="/member/find/id" id="forgotId">Forgot ID?</a> </div>
+                </div>
+                <div class="d-flex align-items-start">
+                    <div class="ml-auto"> <a href="/member/find/pw" id="forgotPw">Forgot Password?</a> </div>
+                </div> <button class="btn btn-block text-center my-3">Log in</button>
+                <div class="text-center pt-3 text-muted"> <a href="/member/save">Sign up</a></div>
+            </form>
+        </div>
+</div>
+
+</html>
+
+
+

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/shop/mypage/check" method="post">
+    <input type="text" readonly th:value="${member_id}" name="member_id"><br>
+    비밀번호<input type="password" name="member_pw">
+    <input type="submit" value="확인">
+    <a href="/main">취소</a>
+
+</form>
+</body>
+</html>

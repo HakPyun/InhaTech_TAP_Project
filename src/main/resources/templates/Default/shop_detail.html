@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+    <script th:src="@{/assets/js/scripts.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<div layout:fragment="content">
+    <section id="counts" class="counts" style="background-color: #FFFFFF;">
+        <div id="portfolio">
+            <div class="container py-10">
+                <div class="row align-items-center text-center justify-content-between" style="margin-top:100px; margin-bottom:100px;">
+                    <h2 style="font-weight: bold;"><span class="text-dark">Info</span></h2>
+                </div>
+                <div class="container-fluid p-0" style="border: ridge 5px;">
+                    <div class="row g-0">
+                        <div th:each="image : ${shopImgNames}" class="col-lg-4 col-sm-6">
+                            <a class="portfolio-box" th:href="@{'/img/shopImg/' + ${image}}">
+                                <img class="img-fluid" th:src="@{'/img/shopImg/' + ${image}}" style="width:400px; height:200px;" alt="..." />
+                                <div class="portfolio-box-caption">
+                                    <!-- 추가적인 캡션 등을 표시할 수 있습니다. -->
+                                </div>
+                            </a>
+                        </div>
+                        <!-- 더미 이미지의 경로를 실제 더미 이미지의 경로로 변경 -->
+                        <div th:if="${6 - shopImgNames.size()} > 0" th:each="dummyImage : ${#numbers.sequence(1, 6 - shopImgNames.size())}" class="col-lg-4 col-sm-6">
+                            <a class="portfolio-box" th:href="@{'/assets/img/readyimg.png'}">
+                                <img class="img-fluid" th:src="@{'/assets/img/readyimg.png'}" style="width:400px; height:200px;" alt="Real Dummy Image" />
+                                <div class="portfolio-box-caption">
+                                    <!-- 추가적인 캡션 등을 표시할 수 있습니다. -->
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container py-10">
+            <div class="col-lg-12">
+                <form method="post" role="form" class="php-email-form" th:object="${myShop}">
+                    <div class="form-group" style="margin-top:10px; margin-bottom:50px; border-bottom: dotted 3px gray;">
+                        <h1 style="font-weight: bold;"><p th:text="*{sName}" ></p></h1>
+                        <p th:text="*{cat}" style="text-align:right;font-weight: bold;"></p>
+                        <div class="form-group" style="margin-top:10px; margin-bottom:10px;  font-weight: bold;">
+                            <label ><h3><i class="bx bx-map"></i><label style="font-weight: bold;">위치</label></h3><p th:text="*{sAddrMain}"></p></label>
+                            <label th:text="*{sAddrSub}"></label>
+                        </div>
+                        <div class="form-group" style="margin-top:10px; font-weight: bold;">
+                            <label ><h3><i class='bx bx-phone-call'></i><label style="font-weight: bold;">전화번호</label></h3><p th:text="*{sTell}"></p></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:10px; margin-bottom:20px; font-weight: bold;">
+                        <h3><i class='bx bx-user-voice'></i><label style="font-weight: bold;">사장님의 한마디</label></h3>
+                        <label  th:text="*{ceoIntroduction}"></label>
+                    </div>
+                    <div class="form-group" style="margin-top:10px; margin-bottom:50px; border-bottom: dotted 3px gray; font-weight: bold;">
+                        <h3><i class='bx bx-like'></i><label style="font-weight: bold;">추천</label></h3>
+                        <label style="margin-bottom:10px;" th:text="*{sexRecommendation}"></label>
+                    </div>
+                    <div class="form-group" style="margin-top:10px; margin-bottom:20px;">
+                        <h3><i class='bx bx-food-menu'></i><label style="font-weight: bold;">추천메뉴</label></h3>
+                    </div>
+                    <div style="margin-top:20px; margin-bottom:50px;border-bottom: dotted 3px gray; font-weight: bold;">
+                        <div class="row" th:each="value:${menus}">
+                            <div class="col form-group">
+                                <p th:text="${value.menu}"></p>
+                            </div>
+                            <div class="col form-group" style=" text-align: right;">
+                                <p th:text="${value.menu_price} + 원">가격</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="custom"  style="margin-bottom:10px; border-bottom: dotted 3px gray;">
+                        <h3> <i class='bx bx-time-five'></i><label style="font-weight: bold;">영업시간</label></h3>
+                        <div class="form-group" style="text-align:right; font-weight: bold;">
+                            <div class="col form-group">
+                                <span >영업시간:<label th:text="${business.sTime}"></label>~<label th:text="${business.eTime}"></label></span>
+                            </div>
+                        </div>
+                        <div class="form-group" style="text-align:right;font-weight: bold;">
+                            <div class="col form-group">
+                                <label>Break Time:<span th:text="*{breakSTime}"></span>~<span th:text="*{breakETime}"></span></span></label>
+                            </div>
+                        </div>
+                        <div class="form-group" style="text-align:right;margin-bottom:10px;font-weight: bold;">
+                            <div class="col form-group">
+                                <span >휴일:<label th:text="${business.sDay}"></label></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-group" style="margin-top:60px">
+                        <h3> <i class='bx bx-calendar-check'></i><label style="font-weight: bold;">특이사항</label></h3>
+                        <textarea class="form-control" name="message" rows="3" placeholder="Message" th:text="*{bhSignificant}" readonly></textarea>
+                    </div>
+                    <div class="form-group" style="margin-top:60px">
+                        <h3> <i class='bx bx-message-alt-edit'></i><label style="font-weight: bold;">가게 꿀팁</label></h3>
+                        <textarea class="form-control" name="message" rows="3" placeholder="Message" th:text="*{tips}" readonly></textarea>
+
+                    </div>
+                    <div class="row" style="margin-top:100px;">
+                        <div class="col form-group">
+                            <h3>Review</h3>
+                        </div>
+                        <div class="col form-group" style=" text-align: right;">
+                            <a th:href="@{|/shop/review/*{sName}|}" class="btn btn-primary">리뷰쓰기</a>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="container_review" style="width:100%">
+                    <div th:each="review : ${reviewInfo}" class="review-card" style="width:100%">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name" th:text="${review.memberId}"></div>
+                            <div class="review-time" th:text="${review.created_at}"></div>
+                        </div>
+                        <div class="review-content">
+                            <p class="star_rating">
+                                <a th:utext="${'★'.repeat(review.userScore ?: 0)}" class="on"></a>
+                                <a th:utext="${'☆'.repeat(5 - (review.userScore ?: 0))}"></a>
+                            </p>
+                            <p th:text="${review.userReview}"></p>
+                        </div>
+                        <div class="star_rating">
+                            <span th:utext="${'★'.repeat(review.userScore ?: 0)}"></span>
+                            <span th:utext="${'☆'.repeat(5 - (review.userScore ?: 0))}"></span>
+                        </div>
+                        <p></p>
+                        <img th:src="'/img/ReviewImg/'+${review.ImgName}" class="review-image" alt="이미지 등록 안함">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+</html>

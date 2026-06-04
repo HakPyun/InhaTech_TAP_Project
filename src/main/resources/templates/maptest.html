@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="utf-8"/>
+    <title>다른 지역 선택</title>
+    <style>
+        #mapwrap{position:relative;overflow:hidden;}
+        .category, .category *{margin0;padding:0;color:#000;}
+        .category {position:absolute;overflow:hidden;top:10px;left:10px;width:200px;height:50px;z-index:10;border:1px solid black;font-family:'Malgun Gothic','맑은 고딕',sans-serif;font-size:12px;text-align:center;background-color:#fff;}
+        .category .menu_selected {background:#FF5F4A;color:#fff;border-left:1px solid #915B2F;border-right:1px solid #915B2F;margin:0 -1px;}
+        .category li{list-style:none;float:left;width:50px;height:48px;padding-top:0px;cursor:pointer;}
+        .category .ico_comm {display:block;margin:0 auto 2px;width:24px;height:30px;background:url('../img/ctgc.png') no-repeat;}
+        .category .ico_sake {background-position:-7px -5px;}
+        .category .ico_food {background-position:-7px -63px;}
+        .category .ico_coffee {background-position:-7px -34px;}
+        .category .center-text {display: flex; justify-content: center; align-items: center; width: 100%;height: 100%;}
+
+        .wrap {position: absolute; left: 0; bottom: 40px;width: 288px;height: 132px;
+        margin-left: -144px; text-align: left;overflow: hidden;font-size: 12px; font-family:
+        'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+        .wrap2 {
+    width: 100%; /* 또는 다른 너비 값으로 조절 */
+}
+
+.wrap2 .info2 {
+    width: 391%;
+    height: 120px;
+    border-radius: 5px;
+    border-bottom: 2px solid #ccc;
+    border-right: 1px solid #ccc;
+    overflow: hidden;
+    background: #fff;
+}
+        .wrap * {padding: 0; margin: 0;}
+        .wrap2 * {padding: 0; margin: 0;}
+        .wrap .info {width: 286px;height: 120px; border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px
+        solid #ccc;overflow: hidden;background:#fff;}
+        .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+        .wrap2 .info2:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+        .info .title {padding: 5px 0 0 10px; height: 30px; background: #eee;
+        border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+        .info2 .title {padding: 5px 0 0 10px; height: 30px; background: #eee;
+        border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+        .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;
+        height: 17px; background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+        .info .close:hover {cursor: pointer;}
+        .info .body {position: relative;overflow: hidden;}
+        .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+        .info2 .body {position: relative;overflow: hidden;}
+        .info2 .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+        .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+        .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+        .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height:71px;
+        border: 1px solid #ddd; color: #888;overflow: hidden;}
+        .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;
+        bottom: 0; width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');}
+        .info .link {color: #5085BB;}
+        .info2 .img {position: absolute;top: 6px;left: 5px;width: 73px;height:71px;
+        border: 1px solid #ddd; color: #888;overflow: hidden;}
+        .info2 .link {color: #5085BB;}
+
+        @media all and (max-width:479px) {
+           .wrap2 .info2 {width: 338px;height: 120px; border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px
+        solid #ccc;overflow: hidden;background:#fff;}
+        }
+
+        @media (min-width: 480px) and (max-width: 768px) {
+           .wrap2 .info2 {width: 514px;height: 120px; border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px
+        solid #ccc;overflow: hidden;background:#fff;}
+        }
+
+        @media (min-width: 769px) and (max-width: 991px) {
+           .wrap2 .info2 {width: 694px;height: 120px; border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px
+        solid #ccc;overflow: hidden;background:#fff;}
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px) {
+           .wrap2 .info2 {width: 934px;height: 120px; border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px
+        solid #ccc;overflow: hidden;background:#fff;}
+        }
+
+        @media (min-width: 1200px) and (max-width: 1399px) {
+           .wrap2 .info2 {width: 1114px;height: 120px; border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px
+        solid #ccc;overflow: hidden;background:#fff;}
+        }
+
+    </style>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="bg-light">
+        <div class="container py-2">
+            <div id="mapwrap">
+                <!-- 지도가 표시될 div -->
+                <div id="map" style="width:100%;height:400px;"></div>
+                <!-- 지도 위에 표시될 마커 카테고리 -->
+                <div class="category">
+                    <ul>
+                        <li id="all" onclick="changeMarker('all')">
+                            <span class="center-text">전체</span>
+                        </li>
+                        <li id="sakeMenu" onclick="changeMarker('sake')">
+                            <span class="ico_comm ico_sake"></span>
+                            술집
+                        </li>
+                        <li id="foodMenu" onclick="changeMarker('food')">
+                            <span class="ico_comm ico_food"></span>
+                            음식점
+                        </li>
+                        <li id="coffeeMenu" onclick="changeMarker('coffee')">
+                            <span class="ico_comm ico_coffee"></span>
+                            카페
+                        </li>
+                    </ul>
+                </div>
+                <div id="listContainer"></div>
+            </div>
+
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=&libraries=services,clusterer,drawing"></script>
+            <script src="../js/maptest.js"></script>
+        </div>
+    </section>
+</div>
+</body>
+</html>

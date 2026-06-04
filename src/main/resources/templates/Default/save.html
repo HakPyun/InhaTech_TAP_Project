@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+>
+
+<head>
+    <th:block layout:fragment="script">
+
+        <script th:inline="javascript">
+            $(document).ready(function(){
+                let errorMessage = [[${errorMessage}]];  // [[${errorMessage}]] : 변수 내용 출력
+                if(errorMessage != null){
+                    alert(errorMessage);
+                }
+            });
+        </script>
+    </th:block>
+    <style>
+        .fieldError {
+            color: red;
+        }
+            .bg-light{
+                height: 0 auto;
+                padding-top:55px;
+                padding-bottom:75px;
+            }
+            .flex-fill.mx-xl-5.mb-2{
+                margin: 0 auto;
+                width : 700px;
+                padding-right: 7rem;
+                padding-left: 7rem;
+            }
+
+            .container.py-4{
+                margin: 0 auto;
+                width : 80%;
+            }
+
+            .d-grid.gap-2{
+                padding-top: 30px;
+            }
+
+
+    </style>
+    <script src="/js/user.js"></script>
+</head>
+<div layout:fragment="content">
+    <section class="bg-light">
+        <div class="container py-4">
+            <div class="row align-items-center text-center justify-content-between">
+                <span class="text-dark h4">회원가입</span>
+            </div>
+
+
+    <form action="/member/save" th:object="${memberDTO}" method="post">
+        <div class="form-group">
+            <label for="mId" class="form-label mt-4">아이디</label>
+            <div class="row">
+                <div class="col">
+            <input type="text" id="mId" class="form-control"  name="member_id" th:field="*{member_id}" >
+                </div>
+                <div class="col">
+                    <input type="button" id="idBtn"  class="btn btn-info" onclick="check_id()" value="중복체크">
+                </div>
+                <p th:if="${#fields.hasErrors('member_id')}" th:errors="*{member_id}" class="fieldError">Incorrect data</p>
+                <p id="id-error-message" style="color: red;"></p>
+
+            </div>
+
+
+            <label for="mPw" class="form-label mt-4">비밀번호</label>
+            <input type="password"  class="form-control" id="mPw" name="member_pw" th:field="*{member_pw}">
+            <p th:if="${#fields.hasErrors('member_pw')}" th:errors="*{member_pw}" class="fieldError">Incorrect data</p>
+
+            <label for="mName" class="form-label mt-4">이름</label>
+
+            <input type="text" id="mName" name="member_name" class="form-control" th:field="*{member_name}"> <span name="valid_name" th:text="${valid_member_name}"></span><br>
+
+
+            <p th:if="${#fields.hasErrors('member_name')}" th:errors="*{member_name}" class="fieldError">Incorrect data</p><br>
+
+            <label for="mNickname" class="form-label mt-4">닉네임</label>
+           <div class="row">
+               <div class="col">
+            <input type="text" id="mNickname"  class="form-control" name="member_nickname" th:field="*{member_nickname}">
+               </div>
+               <div class="col">
+                   <input type="button" id="NickBtn" onclick="check_nickname()" class="btn btn-info" value="중복체크">
+           </div>
+           </div>
+
+            <p th:if="${#fields.hasErrors('member_nickname')}" th:errors="*{member_nickname}" class="fieldError">Incorrect data</p>
+            <p id="nick-error-message" style="color: red;"></p><br>
+            <!--    <br><span id="nickMessage"name="valid_nickname" th:text="${valid_member_nickname}"></span><br>-->
+
+
+            <label for="mTell" class="form-label mt-4">전화번호</label>
+            <input type="text" oninput="autoHyphen2(this)" class="form-control" maxlength="13" placeholder="전화번호를 입력해보세요!" id="mTell" name="member_phone" th:field="*{member_phone}">
+            <span name="valid_phone" th:text="${valid_member_phone}"></span><br>
+            <label for="mStatus" class="form-label mt-4">비밀번호 찾기 질문</label>
+            <select id="mStatus" name="member_status" class="form-select" th:field="*{member_status}">
+                <option value="중학교">내가 나온 중학교는?</option>
+                <option value="동네">내가 사는 동네는?</option>
+            </select>
+            <!--    <input type="text" id="mStatus" name="member_status" th:field="*{member_status}"><br>-->
+            <label for="mAnswer" class="form-label mt-4">답변</label>
+            <input type="text" id="mAnswer" class="form-control" name="member_answer" th:field="*{member_answer}">
+            <p th:if="${#fields.hasErrors('member_answer')}" th:errors="*{member_answer}" class="fieldError">Incorrect data</p>
+
+                <div  class="d-grid gap-2 ">
+                    <button  type="submit" class="btn btn-primary btn-lg">회원가입</button>
+                </div>
+
+
+        <!--    name 속성:서버로 전송할 때 변수이름 역할-->
+
+
+
+
+</div>
+    </form>
+        </div>
+    </section>
+</div>
+
+</html>
+
+

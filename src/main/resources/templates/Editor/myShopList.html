@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <script th:src="@{/js/deleteShop.js}"></script>
+    <th:block layout:fragment="script">
+
+        <script th:inline="javascript">
+            $(document).ready(function(){
+                var errorMessage = [[${errorMessage}]];
+                if(errorMessage != null){
+                    alert(errorMessage);
+                }
+        </script>
+    </th:block>
+    </head>
+    <div layout:fragment="content">
+        <section class="bg-light">
+            <div class="container py-6">
+
+                <table class="table caption-top">
+                    <caption>내가 등록한 가게 리스트</caption>
+                    <thead class="table-dark">
+                    <tr>
+                        <th scope="col">이미지</th>
+                        <th scope="col">가게 정보</th>
+                        <th scope="col">조회</th>
+                        <th scope="col">수정</th>
+                        <th scope="col">삭제</th>
+
+
+                    </tr>
+                    </thead>
+                    <tr th:each="value: ${List}" scope="row" >
+                        <td th:text="이미지"></td>
+                        <td >
+                            <span th:text="${value.sName}"></span><br>
+                            <span th:text="${value.sAddrMain}"></span>
+                            <span th:text="${value.sAddrSub}"></span>
+                        </td>
+                        <td><a th:href="@{|/shop/${value.sName}|} " class="btn btn-primary">조회</a></td>
+                        <td><a th:href="@{|/shop/update/${value.sName}|} " class="btn btn-primary">수정</a></td>
+                        <td><input type="button" class="btn btn-primary" th:attr="onclick='adminDeleteShop(\'' + ${value.sName} + '\')'" value="삭제"></td>
+                    </tr>
+
+                </table>
+            </div>
+        </section>
+    </div>
+
+    </html>
