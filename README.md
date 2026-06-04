@@ -1,5 +1,5 @@
 # Travel Along the Peninsula (TAP_Project)
-<img width="769" height="290" alt="image" src="https://github.com/user-attachments/assets/8b466424-bb46-4a0b-b0f0-12e85c963361" />
+<img width="1024" height="386" alt="image" src="https://github.com/user-attachments/assets/3771e9fc-b175-49fa-8d6e-f3ec0d21b0ae" />
 
 > '반도를 따라 여행하다'라는 뜻으로 인하대 후문의 맛집을 등록하고 리뷰를 남길 수 있는 프로그램.
 
